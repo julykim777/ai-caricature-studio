@@ -1,0 +1,20 @@
+{
+  "name": "ai-caricature-studio",
+  "version": "1.0.0",
+  "description": "사진을 업로드하면 AI가 캐리커처·애니메이션·영화 포스터 등으로 변환해 주는 웹 앱",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.10",
+    "express": "^5.3.0",
+    "multer": "^2.5.0",
+    "openai": "^7.55.0"
+  }
+}

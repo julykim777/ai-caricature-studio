@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 캐리커처 스튜디오</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%235b4bdb'/%3E%3Ctext x='16' y='22' font-size='18' text-anchor='middle' fill='white'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">✦</span>
+      <span>AI 캐리커처 스튜디오</span>
+    </div>
+    <span id="modeBadge" class="badge" hidden>데모 모드</span>
+  </header>
+
+  <main class="container">
+    <section class="intro">
+      <h1>내 사진을 새로운 스타일로</h1>
+      <p>사진을 올리고 스타일을 고른 뒤 변환 버튼을 눌러 보세요.</p>
+    </section>
+
+    <!-- 1. 사진 업로드 -->
+    <section class="panel">
+      <h2><span class="num">1</span>사진 업로드</h2>
+      <label id="dropzone" class="dropzone" for="fileInput" tabindex="0">
+        <input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+        <div id="dropEmpty" class="drop-empty">
+          <div class="drop-icon" aria-hidden="true">⬆</div>
+          <strong>클릭하거나 사진을 끌어다 놓으세요</strong>
+          <span>JPG, PNG, WEBP · 최대 10MB</span>
+        </div>
+        <div id="dropPreview" class="drop-preview" hidden>
+          <img id="thumb" alt="업로드한 사진 미리보기">
+          <div class="file-meta">
+            <strong id="fileName"></strong>
+            <span id="fileSize"></span>
+            <button id="removeBtn" type="button" class="link-btn">다른 사진 선택</button>
+          </div>
+        </div>
+      </label>
+    </section>
+
+    <!-- 2. 스타일 선택 -->
+    <section class="panel">
+      <h2><span class="num">2</span>스타일 선택</h2>
+      <div id="styleGrid" class="style-grid" role="radiogroup" aria-label="변환 스타일"></div>
+    </section>
+
+    <!-- 3. 변환 -->
+    <section class="action">
+      <button id="generateBtn" class="primary" type="button" disabled>
+        <span class="btn-label">이미지 변환하기</span>
+        <span class="spinner" aria-hidden="true"></span>
+      </button>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <!-- 4. 결과 비교 & 5. 다운로드 -->
+    <section id="resultPanel" class="panel" hidden>
+      <div class="result-head">
+        <h2><span class="num">3</span>결과 비교</h2>
+        <div class="tabs" role="tablist">
+          <button type="button" class="tab active" data-view="side" role="tab">나란히 보기</button>
+          <button type="button" class="tab" data-view="slider" role="tab">슬라이더 비교</button>
+        </div>
+      </div>
+
+      <div id="sideView" class="side-view">
+        <figure>
+          <img id="originalImg" alt="원본 이미지">
+          <figcaption>원본</figcaption>
+        </figure>
+        <figure>
+          <img id="resultImg" alt="변환된 이미지">
+          <figcaption id="resultCaption">변환 결과</figcaption>
+        </figure>
+      </div>
+
+      <div id="sliderView" class="slider-view" hidden>
+        <div class="compare" id="compare">
+          <img id="compareAfter" alt="변환된 이미지">
+          <div class="compare-before" id="compareBeforeWrap">
+            <img id="compareBefore" alt="원본 이미지">
+          </div>
+          <div class="compare-handle" id="compareHandle" aria-hidden="true"></div>
+          <input id="compareRange" type="range" min="0" max="100" value="50" aria-label="원본/결과 비교 위치">
+          <span class="tag left">원본</span><span class="tag right">결과</span>
+        </div>
+      </div>
+
+      <div class="result-actions">
+        <button id="downloadBtn" type="button" class="primary">이미지 다운로드</button>
+        <button id="retryBtn" type="button" class="secondary">다른 스타일로 다시 변환</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">이미지는 OpenAI 이미지 편집 API로 변환됩니다 · 업로드한 사진은 저장하지 않습니다</footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
